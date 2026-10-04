@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Manual práctico de productividad</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Figtree:wght@400;600;700&display=swap">
+<style>
+:root{--bg:#f2f5ef;--sf:#fff;--ink:#1d2419;--mu:#5d6a58;--ac:#3d7a22;--ai:#fff;--lm:#a6f068;--ln:#dbe3d5;--r:16px;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1b2026;--sf:#252c34;--ink:#eaf0e6;--mu:#a3afa0;--ac:#9be85a;--ai:#14210a;--ln:#38424c;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#1b2026;--sf:#252c34;--ink:#eaf0e6;--mu:#a3afa0;--ac:#9be85a;--ai:#14210a;--ln:#38424c;color-scheme:dark}
+*,*::before,*::after{box-sizing:inherit;margin:0}
+html{scroll-behavior:smooth;scroll-padding-top:calc(env(safe-area-inset-top,0px) + 96px)}
+body{background:var(--bg);color:var(--ink);font:16px/1.6 Figtree,system-ui,sans-serif;-webkit-text-size-adjust:100%}
+h1,h2,h3{font-family:'Bricolage Grotesque',system-ui,sans-serif;line-height:1.1;letter-spacing:-.02em}
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:var(--bg);border-bottom:1px solid var(--ln)}
+.bar,nav{max-width:1080px;margin:auto;padding:8px 18px}
+.bar{display:flex;justify-content:space-between;align-items:center;padding-bottom:0}
+.bar b{font:800 17px 'Bricolage Grotesque',system-ui}
+nav{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}
+nav a{white-space:nowrap;padding:6px 13px;border-radius:99px;color:var(--mu);text-decoration:none;font-weight:600;font-size:14px;transition:background .25s,color .25s}
+nav a.on{background:var(--ac);color:var(--ai)}
+#pg{display:block;height:3px;width:0;background:var(--ac)}
+section{max-width:1080px;margin:auto;padding:80px 18px 0}
+h2{font-size:clamp(28px,4.5vw,42px);margin-bottom:10px}
+h3{font-size:20px;margin-bottom:6px}
+.lead{color:var(--mu);max-width:62ch;margin-bottom:28px}
+.card{background:var(--sf);border:1px solid var(--ln);border-radius:var(--r);padding:20px}
+.grid{display:grid;gap:14px}.g5{grid-template-columns:repeat(auto-fit,minmax(190px,1fr))}.g2{grid-template-columns:repeat(auto-fit,minmax(min(100%,330px),1fr))}
+.btn{border:0;background:var(--ac);color:var(--ai);padding:10px 18px;border-radius:12px;font:700 15px Figtree,system-ui;cursor:pointer;text-decoration:none;display:inline-block;transition:transform .2s}
+.btn:hover{transform:translateY(-2px)}.btn.o{background:none;color:var(--ink);border:1px solid var(--ln)}
+button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid var(--ac);outline-offset:2px}
+input,textarea{width:100%;font:inherit;color:inherit;background:var(--bg);border:1px solid var(--ln);border-radius:10px;padding:9px 12px}
+textarea{resize:vertical;min-height:78px}
+label{display:block;font-weight:600;font-size:14px;margin:12px 0 4px}
+/* hero */
+.hero{padding-top:64px;position:relative;overflow:hidden}
+.hero h1{font-size:clamp(44px,10vw,104px);font-weight:800}
+.hero .fr{display:inline-flex;flex-direction:column;align-items:center;margin:22px 0;font:700 clamp(18px,3vw,26px) 'Bricolage Grotesque',system-ui}
+.hero .fr i{display:block;width:100%;height:3px;background:var(--ac);margin:4px 0;transform-origin:left;animation:ln 1s .3s both}
+@keyframes ln{from{transform:scaleX(0)}}
+.hx{position:absolute;right:-60px;top:20px;width:min(46vw,380px);aspect-ratio:1;background:var(--lm);opacity:.5;clip-path:polygon(25% 5%,75% 5%,100% 50%,75% 95%,25% 95%,0 50%);animation:fl 9s ease-in-out infinite alternate;z-index:-1}
+@keyframes fl{to{transform:translateY(16px) rotate(6deg)}}
+.hero>*{position:relative}
+/* flip */
+.fc{perspective:900px;height:215px;background:none;border:0;padding:0;cursor:pointer;font:inherit;color:inherit;text-align:left}
+.fc>div{position:relative;height:100%;transition:transform .6s;transform-style:preserve-3d}
+.fc.on>div{transform:rotateY(180deg)}
+.fc .f,.fc .b{position:absolute;inset:0;padding:18px;border-radius:var(--r);backface-visibility:hidden;-webkit-backface-visibility:hidden;border:1px solid var(--ln);background:var(--sf);display:flex;flex-direction:column;gap:6px}
+.fc .b{transform:rotateY(180deg);background:var(--ac);color:var(--ai);border-color:transparent;justify-content:center}
+.fc small{font-size:13px;opacity:.75}.fc b{font:800 23px 'Bricolage Grotesque',system-ui}.fc p{font-size:14px;color:var(--mu)}
+/* radar */
+.rg{display:grid;grid-template-columns:auto 1fr;gap:6px 12px;align-items:center;font-size:14px}
+input[type=range]{padding:0;accent-color:var(--ac);border:0;background:none}
+.ord{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}.ord span{background:var(--bg);border:1px solid var(--ln);border-radius:99px;padding:3px 12px;font-size:14px}
+/* week */
+.wk{overflow-x:auto}.pt{display:grid;grid-template-columns:minmax(120px,1.5fr) repeat(6,1fr) 40px;gap:8px;align-items:center;min-width:520px;text-align:center;font-size:14px}
+.pt>span:nth-child(8n+1){text-align:left;font-weight:600}
+.dy{width:36px;height:36px;justify-self:center;border-radius:50%;border:2px solid var(--ln);background:none;cursor:pointer;transition:background .2s,transform .2s}
+.dy.on{background:var(--ac);border-color:var(--ac);transform:scale(1.08)}
+/* lists */
+.ls ul{list-style:none;padding:0;display:grid;gap:6px;margin-bottom:8px}
+.ls li{display:flex;gap:10px;align-items:center;background:var(--bg);border-radius:10px;padding:6px 10px;font-size:15px}
+.ls li span{color:var(--mu);width:22px}.ls li em{flex:1;font-style:normal}
+.ls li button{border:0;background:none;color:var(--mu);font-size:18px;cursor:pointer}
+.ad{display:flex;gap:8px}.ad .btn{padding:8px 14px}.ls small{color:var(--mu)}
+/* steps + smart */
+.st{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));counter-reset:s}
+.st .card{position:relative;border-left:5px solid var(--ac)}.st .card::before{counter-increment:s;content:counter(s);position:absolute;right:16px;top:8px;font:800 40px 'Bricolage Grotesque';color:var(--ln)}
+.sm{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 8px}
+.sm button{border:1px solid var(--ln);background:var(--sf);color:var(--ink);border-radius:12px;padding:8px 14px;font:700 15px Figtree,system-ui;cursor:pointer;transition:background .2s}
+.sm button.on{background:var(--ac);color:var(--ai);border-color:var(--ac)}
+#sd{min-height:52px;transition:opacity .25s}
+/* calc */
+.big{font:800 clamp(30px,6vw,46px) 'Bricolage Grotesque',system-ui;color:var(--ac)}
+.chk{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--ln);cursor:pointer}
+.chk input{width:22px;height:22px;accent-color:var(--ac);flex:none;margin-top:2px;padding:0}
+.bar2{height:8px;border-radius:9px;background:var(--ln);overflow:hidden;margin:6px 0 10px}.bar2 i{display:block;height:100%;width:0;background:var(--ac);transition:width .4s}
+.mr{display:grid;grid-template-columns:1fr auto;gap:6px;margin-bottom:6px}
+.mr div{display:flex;gap:4px;align-items:center}
+.mr div button{width:30px;height:30px;border-radius:8px;border:1px solid var(--ln);background:none;color:var(--mu);font-weight:700;cursor:pointer}
+.mr div button.on{background:var(--ac);color:var(--ai);border-color:var(--ac)}
+/* canvas */
+.cv{display:grid;grid-template-columns:repeat(10,1fr);gap:10px;margin-top:18px}
+.cv .card{padding:12px;display:flex;flex-direction:column;gap:6px;border-top:5px solid var(--c)}
+.cv textarea{flex:1;min-height:100px;font-size:13px}.cv h3{font-size:16px;margin:0}.cv p{font-size:12px;color:var(--mu);line-height:1.4}
+.lg{display:flex;flex-wrap:wrap;gap:14px;font-size:14px;color:var(--mu);margin-top:12px}.lg i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+@media(max-width:820px){.cv{grid-template-columns:1fr}.cv>*{grid-column:auto!important;grid-row:auto!important}}
+footer{max-width:1080px;margin:auto;padding:70px 18px 50px;color:var(--mu);font-size:14px}
+@media print{.top,.no,.hx{display:none}section{padding-top:24px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<header class="top"><div class="bar"><b>Manual de productividad</b><button class="btn o" id="th" aria-label="Cambiar tema claro u oscuro">Tema</button></div><nav id="nav" aria-label="Secciones"></nav><i id="pg"></i></header>
+<main>
+<section id="inicio" class="hero" data-t="Inicio"><div class="hx"></div>
+<h1>Productividad</h1>
+<div class="fr"><span>Calidad de trabajo</span><i></i><span>Tiempo</span></div>
+<p class="lead">Un manual para pasar de actuar por inercia a trabajar con sueños, objetivos y metas medibles. Cada ejercicio se llena aquí mismo y se guarda en tu navegador.</p>
+<a class="btn" href="#como">Empezar</a> <button class="btn o no" onclick="print()">Imprimir mis respuestas</button></section>
+
+<section id="como" data-t="Cómo somos"><h2>¿Cómo somos?</h2><p class="lead">Cinco hábitos que frenan los resultados. Toca cada tarjeta para ver cómo debemos ser.</p><div class="grid g5" id="fc"></div></section>
+
+<section id="rueda" data-t="Rueda de la vida"><h2>La rueda de la vida</h2><p class="lead">Mueve cada control según la atención real que le das hoy a cada área. Compara tu orden real con el ideal.</p>
+<div class="grid g2"><div class="card"><svg id="rd" viewBox="0 0 320 300" role="img" aria-label="Gráfica de la rueda de la vida" style="width:100%;max-height:340px"></svg></div>
+<div class="card"><div class="rg" id="sl"></div><label>Orden ideal</label><div class="ord" id="id"></div><label>Tu orden real</label><div class="ord" id="re"></div></div></div></section>
+
+<section id="priorizar" data-t="Priorizar"><h2>Priorizar</h2><p class="lead">Marca los días en que atiendes cada área. La clave: romper hábitos y barreras mentales.</p>
+<div class="card wk"><div class="pt" id="pt"></div></div>
+<div class="grid g2" style="margin-top:14px"><div class="card ls" id="tg"><h3>Acciones tangibles</h3><p class="lead" style="margin-bottom:10px">Las que puedes medir y dan resultados.</p></div><div class="card ls" id="it"><h3>Acciones intangibles</h3><p class="lead" style="margin-bottom:10px">Las que haces a diario sin poder medirlas.</p></div></div></section>
+
+<section id="suenos" data-t="Sueños y metas"><h2>Sueños, objetivos y metas</h2><p class="lead">Actuamos cuando existen dos factores: beneficios tangibles y efecto pérdida.</p>
+<div class="st"><div class="card"><h3>Sueño</h3><p>El último «¿para qué?» de lo que haces cada día. Cuanto más grande y específico, menos excusas para actuar.</p></div><div class="card"><h3>Objetivo</h3><p>Un trozo del sueño con fecha límite más cercana. Es un fin, un resultado.</p></div><div class="card"><h3>Meta</h3><p>Una acción para conseguir los objetivos, que te lleva a tus sueños.</p></div></div>
+<h3 style="margin-top:34px">Metas SMART</h3><div class="sm" id="sm"></div><p id="sd" class="lead"></p>
+<h3 style="margin-top:26px">Define 2 objetivos por área para este mes</h3><div class="grid g5" id="ob" style="margin-top:12px"></div>
+<div class="card ls" id="bt" style="margin-top:18px"><h3>10 beneficios tangibles de lograr tu objetivo</h3></div></section>
+
+<section id="productividad" data-t="Productividad"><h2>¿Qué es la productividad?</h2><p class="lead">Productividad = calidad de trabajo ÷ tiempo. La calidad se compone de motivación, satisfacción y felicidad.</p>
+<div class="grid g2"><div class="card"><h3>¿Cuánto vale tu hora de trabajo?</h3><label for="c1">Ingreso mensual que quieres generar ($)</label><input id="c1" type="number" min="0" data-k="c1" inputmode="decimal"><label for="c2">Días de trabajo al mes</label><input id="c2" type="number" min="1" data-k="c2" inputmode="numeric" placeholder="26"><label for="c3">Horas por día</label><input id="c3" type="number" min="1" data-k="c3" inputmode="numeric" placeholder="8"></div>
+<div class="card"><p>Una hora de tiempo =</p><div class="big" id="ch">$0</div><p style="margin-top:14px">Un día de 8 horas en tu local =</p><div class="big" id="cd">$0</div></div></div>
+<div class="grid g2" style="margin-top:14px"><div class="card ls" id="al"><h3>Alta rentabilidad</h3><p class="lead" style="margin-bottom:10px">Tareas a las que, si les dedicas <b>más tiempo</b>, mejoran los resultados de tu empresa.</p></div><div class="card ls" id="ba"><h3>Baja rentabilidad</h3><p class="lead" style="margin-bottom:10px">Tareas a las que debes dedicar <b>menos tiempo</b> para mejorar tus resultados.</p></div></div>
+<div class="card" style="margin-top:14px"><h3>Cinco metas para aumentar la productividad</h3><div class="bar2"><i id="pb"></i></div><div id="mt"></div></div></section>
+
+<section id="ciclo" data-t="Ciclo productivo"><h2>Define tu ciclo productivo</h2><p class="lead">Reúne todo en una hoja: del sueño a las metas, con obstáculos y soluciones.</p>
+<div class="card"><label for="k1">Área</label><input id="k1" data-k="k1" value="Profesional"><label for="k2">Sueño</label><input id="k2" data-k="k2"><label for="k3">Objetivo</label><input id="k3" data-k="k3">
+<div class="ls" id="cb"><label>Beneficios tangibles (hasta 10)</label></div>
+<label>Metas (marca cuáles cumplen S, M, A, R y T)</label><div id="mm"></div>
+<div class="grid g2"><div><label for="k4">Actividades de alta rentabilidad intangible</label><textarea id="k4" data-k="k4"></textarea></div><div><label for="k5">Actividades de alta rentabilidad tangible</label><textarea id="k5" data-k="k5"></textarea></div><div><label for="k6">Obstáculos</label><textarea id="k6" data-k="k6"></textarea></div><div><label for="k7">Soluciones</label><textarea id="k7" data-k="k7"></textarea></div></div>
+<p style="margin-top:16px"><button class="btn no" onclick="print()">Imprimir mi ciclo</button></p></div></section>
+
+<section id="negocio" data-t="Modelo de negocio"><h2>Tu modelo de negocio</h2><p class="lead">Primero conecta lo que vive tu cliente con lo que ofreces. Después llena el lienzo.</p>
+<div class="grid g2"><div class="card"><h3>Cliente</h3><div id="vc"></div></div><div class="card"><h3>Oferta de valor</h3><div id="vo"></div></div></div>
+<h3 style="margin-top:34px">Business Model Canvas</h3><div class="cv" id="cv"></div>
+<div class="lg"><span><i style="background:#16a34a"></i>Infraestructura</span><span><i style="background:#f97316"></i>Oferta</span><span><i style="background:#2563eb"></i>Clientes</span><span><i style="background:#8b5cf6"></i>Viabilidad financiera y margen</span></div></section>
+</main>
+<footer>Tus respuestas se guardan solo en este navegador.</footer>
+<script>
+const $=(s,e=document)=>e.querySelector(s),$$=(s,e=document)=>[...e.querySelectorAll(s)];
+const S={get(k,d){try{const v=localStorage.getItem('mp:'+k);return v==null?d:JSON.parse(v)}catch(e){return d}},set(k,v){try{localStorage.setItem('mp:'+k,JSON.stringify(v))}catch(e){}}};
+const F=(t,ph)=>`<label>${t}</label><textarea data-k="${'v'+t}"></textarea>`;
+/* tema */
+const de=document.documentElement,dk=()=>de.dataset.theme?de.dataset.theme==='dark':matchMedia('(prefers-color-scheme:dark)').matches;
+const sv=S.get('theme');if(sv)de.dataset.theme=sv;
+$('#th').onclick=()=>{const t=dk()?'light':'dark';de.dataset.theme=t;S.set('theme',t)};
+/* nav */
+const secs=$$('section');$('#nav').innerHTML=secs.map(s=>`<a href="#${s.id}">${s.dataset.t}</a>`).join('');
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)$$('#nav a').forEach(a=>{const on=a.hash==='#'+e.target.id;a.classList.toggle('on',on);if(on){const n=$('#nav');n.scrollTo({left:a.offsetLeft-n.clientWidth/2+a.clientWidth/2,behavior:'smooth'})}})}),{rootMargin:'-30% 0px -60% 0px'});
+secs.forEach(s=>io.observe(s));
+addEventListener('scroll',()=>{$('#pg').style.width=scrollY/(de.scrollHeight-innerHeight)*100+'%'},{passive:true});
+/* tarjetas */
+[["Genéricos","Específicos","Ejercer una acción sin instrucciones ni pasos. «Asear tu recámara», «hay que vender más»."],["Intangibles","Tangibles","Acciones del día a día que no se pueden medir, así que no hay resultados positivos visibles."],["Reactivos","Proactivos","Actuar por causas externas: atender al cliente cuando llega, contestar cuando suena el teléfono."],["No tenemos metas","Tener metas","No sabemos qué es una meta, un objetivo ni cómo definir un sueño."],["No medimos","Medir","No sabemos qué medir, tenemos barreras mentales (paradigmas) y no estamos acostumbrados."]].forEach(c=>{const b=document.createElement('button');b.className='fc';b.setAttribute('aria-pressed','false');b.innerHTML=`<div><span class="f"><small>Cómo somos</small><b>${c[0]}</b><p>${c[2]}</p></span><span class="b"><small>Como debemos ser</small><b>${c[1]}</b></span></div>`;b.onclick=()=>b.setAttribute('aria-pressed',b.classList.toggle('on'));$('#fc').append(b)});
+/* rueda */
+const A=["Salud","Familia","Valores éticos y espirituales","Profesional","Formación","Social y cultural"],AL=["Salud","Familia","Ética","Profesional","Formación","Social"];
+$('#sl').innerHTML=A.map((a,i)=>`<label for="r${i}" style="margin:0">${a}</label><input type="range" id="r${i}" min="0" max="10" value="${S.get('r'+i,5)}">`).join('');
+$('#id').innerHTML=['Salud','Familia','Ética','Profesional','Formación','Social y cultural'].map((a,i)=>`<span>${i+1}. ${a}</span>`).join('');
+const pt=(i,v)=>{const a=-Math.PI/2+i*Math.PI/3;return[160+110*v/10*Math.cos(a),150+110*v/10*Math.sin(a)]};
+function radar(){const v=A.map((_,i)=>+$('#r'+i).value);
+$('#rd').innerHTML=[2.5,5,7.5,10].map(r=>`<polygon points="${A.map((_,i)=>pt(i,r).join(',')).join(' ')}" fill="none" stroke="var(--ln)"/>`).join('')+A.map((_,i)=>{const p=pt(i,10),q=pt(i,12.3);return`<line x1="160" y1="150" x2="${p[0]}" y2="${p[1]}" stroke="var(--ln)"/><text x="${q[0]}" y="${q[1]+4}" text-anchor="middle" font-size="12" fill="var(--mu)">${AL[i]}</text>`}).join('')+`<polygon points="${v.map((x,i)=>pt(i,x).join(',')).join(' ')}" fill="var(--ac)" fill-opacity=".3" stroke="var(--ac)" stroke-width="2.5" stroke-linejoin="round"/>`;
+$('#re').innerHTML=v.map((x,i)=>[x,i]).sort((a,b)=>b[0]-a[0]||a[1]-b[1]).map((o,n)=>`<span>${n+1}. ${AL[o[1]]}</span>`).join('');v.forEach((x,i)=>S.set('r'+i,x))}
+$$('#sl input').forEach(i=>i.oninput=radar);radar();
+/* priorizar */
+const D=["Lun","Mar","Mié","Jue","Vie","Sáb"],P=S.get('pri',{});
+$('#pt').innerHTML='<span></span>'+D.map(d=>`<span>${d}</span>`).join('')+'<span></span>'+A.map((a,i)=>`<span>${a}</span>`+D.map((d,j)=>`<button class="dy${P[i+'-'+j]?' on':''}" data-k2="${i}-${j}" aria-pressed="${!!P[i+'-'+j]}" aria-label="${a}, ${d}"></button>`).join('')+`<span id="n${i}">0</span>`).join('');
+const cnt=()=>A.forEach((_,i)=>$('#n'+i).textContent=D.filter((_,j)=>P[i+'-'+j]).length+'/6');
+$$('.dy').forEach(b=>b.onclick=()=>{const k=b.dataset.k2;P[k]=!P[k];b.classList.toggle('on',P[k]);b.setAttribute('aria-pressed',P[k]);S.set('pri',P);cnt()});cnt();
+/* listas */
+function list(el,k,max,ph){el=typeof el==='string'?$(el):el;let a=S.get(k,[]);const ul=document.createElement('ul'),ad=document.createElement('div'),c=document.createElement('small');ad.className='ad';ad.innerHTML=`<input placeholder="${ph}" aria-label="${ph}"><button class="btn">Agregar</button>`;el.append(ul,ad,c);const inp=$('input',ad);
+const draw=()=>{ul.replaceChildren(...a.map((t,i)=>{const li=document.createElement('li');li.innerHTML='<span>'+(i+1)+'</span><em></em><button aria-label="Quitar">×</button>';$('em',li).textContent=t;$('button',li).onclick=()=>{a.splice(i,1);S.set(k,a);draw()};return li}));c.textContent=a.length+' de '+max;ad.style.display=a.length>=max?'none':''};
+const add=()=>{const v=inp.value.trim();if(v&&a.length<max){a.push(v);S.set(k,a);inp.value='';draw();inp.focus()}};$('button',ad).onclick=add;inp.onkeydown=e=>{if(e.key==='Enter')add()};draw()}
+list('#tg','tg',20,'Escribe una acción tangible');list('#it','it',20,'Escribe una acción intangible');list('#bt','bt',10,'Escribe un beneficio tangible');list('#cb','cb',10,'Escribe un beneficio tangible');list('#al','al',20,'Tarea de alta rentabilidad');list('#ba','ba',20,'Tarea de baja rentabilidad');
+/* SMART */
+const M=[["S","Específico","Dice con claridad qué vas a hacer y con qué pasos."],["M","Medible","Tiene un número o indicador para saber si avanzas."],["A","Alcanzable","Está a tu alcance con los recursos que tienes."],["R","Realista","Es posible en tu contexto y dentro del tiempo disponible."],["T","Tangible","Produce un resultado que se puede ver o tocar."]];
+$('#sm').innerHTML=M.map((m,i)=>`<button>${m[0]} · ${m[1]}</button>`).join('');
+$$('#sm button').forEach((b,i)=>b.onclick=()=>{$$('#sm button').forEach(x=>x.classList.remove('on'));b.classList.add('on');$('#sd').textContent=M[i][2]});$$('#sm button')[0].click();
+$('#ob').innerHTML=A.map((a,i)=>`<div class="card"><h3 style="font-size:16px">${a}</h3><input data-k="o${i}a" aria-label="${a}, objetivo 1" placeholder="Objetivo 1"><input data-k="o${i}b" aria-label="${a}, objetivo 2" placeholder="Objetivo 2" style="margin-top:8px"></div>`).join('');
+/* calculadora */
+function calc(){const i=+$('#c1').value,d=+$('#c2').value||26,h=+$('#c3').value||8,v=i/(d*h)||0,f=n=>'$'+n.toLocaleString('es-MX',{maximumFractionDigits:2});$('#ch').textContent=f(v);$('#cd').textContent=f(v*8)}
+/* 5 metas */
+const G=["Reducir las interrupciones","Reducir los imprevistos","Reducir las tareas de baja rentabilidad","Aumentar las tareas delegables","Dedicar 4 horas al día a las acciones de alta rentabilidad"],gs=S.get('g',[]);
+$('#mt').innerHTML=G.map((g,i)=>`<label class="chk" style="margin:0"><input type="checkbox" ${gs[i]?'checked':''}><span>${g}</span></label>`).join('');
+const pr=()=>{$('#pb').style.width=gs.filter(Boolean).length*20+'%'};$$('#mt input').forEach((c,i)=>c.onchange=()=>{gs[i]=c.checked;S.set('g',gs);pr()});pr();
+/* ciclo: metas */
+const mg=S.get('mg',{});$('#mm').innerHTML=[1,2,3,4,5,6,7].map(n=>`<div class="mr"><input data-k="m${n}" aria-label="Meta ${n}" placeholder="Meta ${n}"><div>${'SMART'.split('').map((l,j)=>`<button class="${mg[n+l+j]?'on':''}" data-m="${n+l+j}" aria-pressed="${!!mg[n+l+j]}" aria-label="Meta ${n} cumple ${l}">${l}</button>`).join('')}</div></div>`).join('');
+$$('#mm [data-m]').forEach(b=>b.onclick=()=>{const k=b.dataset.m;mg[k]=!mg[k];b.classList.toggle('on',mg[k]);b.setAttribute('aria-pressed',mg[k]);S.set('mg',mg)});
+/* canvas */
+$('#vc').innerHTML=F('Pasos del cliente')+F('Felicidades')+F('Frustraciones');$('#vo').innerHTML=F('Productos y servicios')+F('Creadores de satisfacción')+F('Reductores de frustración');
+const C={g:'#16a34a',o:'#f97316',b:'#2563eb',v:'#8b5cf6'};
+$('#cv').innerHTML=[["Asociados clave","¿Quiénes serán los asociados clave en tu modelo de negocios?","1/3","1/3","g"],["Actividades clave","¿Qué actividades son claves para que tu modelo de negocios funcione?","3/5","1","g"],["Recursos clave","¿Requieres de uno o más recursos clave para tu modelo de negocios?","3/5","2","g"],["Propuesta de valor","¿Qué ofrecerás a tu segmento de clientes? ¿De qué forma resolverás sus problemas?","5/7","1/3","o"],["Relación con los clientes","¿Qué tipo de relación mantendrás con tu segmento de clientes?","7/9","1","b"],["Canales","¿Cómo te conocerá y evaluará, y cómo decidirá, comprará y recibirá soporte post-venta tu segmento de clientes?","7/9","2","b"],["Segmento de clientes","¿A quién pretende servir tu modelo de negocios?","9/11","1/3","b"],["Estructura de costos","¿Cuál es tu estructura de costos? ¿Cuáles son los egresos más importantes de tu modelo de negocios?","1/6","3","v"],["Vías de ingreso","¿Cuál será la forma en que tu modelo pretende financiarse y obtener ingresos?","6/11","3","v"]].map((c,i)=>`<div class="card" style="--c:${C[c[4]]};grid-column:${c[2]};grid-row:${c[3]}"><h3>${c[0]}</h3><p>${c[1]}</p><textarea data-k="cv${i}" aria-label="${c[0]}"></textarea></div>`).join('');
+/* guardado de campos */
+$$('[data-k]').forEach(e=>{e.value=S.get(e.dataset.k,e.value);e.addEventListener('input',()=>{S.set(e.dataset.k,e.value);if(/^c[123]$/.test(e.id))calc()})});calc();
+</script>
+</body>
+</html>
